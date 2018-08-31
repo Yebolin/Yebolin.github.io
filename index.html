@@ -251,7 +251,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/31/hexo-upload-source/" itemprop="url">hexo_upload_source</a></h1>
+                <a class="post-title-link" href="/2018/08/31/hexo-upload-source/" itemprop="url">hexo同时上传管理源码跟生成的网页</a></h1>
         
 
         <div class="post-meta">
@@ -303,7 +303,10 @@
       
         
           
-            
+            <p>hexo d的时候，默认只是上传了public（可以手动在参数里面添加文件夹）里面生成的文件，而没有上传源码，如果需要在其他地方也写文章的话，就需要上传源码。<br>可以将源码上传到另外的一个repo里面，或者创建一个分支，单独上传一个分支。这里使用单独创建分支的方法。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#创建一个新的分支</span></span><br><span class="line">git checkout -b <span class="built_in">source</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#写一个新的文章</span></span><br><span class="line">hexo new newpost</span><br><span class="line">git add newpost</span><br><span class="line">git commit -m <span class="string">"newpost add"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#生成并上传文章 默认动作 HEAD -&gt; master</span></span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br><span class="line"></span><br><span class="line"><span class="comment">#上传源码 source-&gt;source</span></span><br><span class="line">git push origin <span class="built_in">source</span></span><br></pre></td></tr></table></figure>
+<p>就可以同时上传source跟master到一个repo，方便管理</p>
+
           
         
       
