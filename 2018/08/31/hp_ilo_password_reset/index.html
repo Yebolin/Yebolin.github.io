@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="博客说不上，偶尔写写东西，作为一下个人的笔记">
+<meta name="description" content="想重置hp远程管理口ilo的密码，一般情况下重启服务器就可以重置密码，但如果不想重启服务器，可以使用hponcfg工具来重置密码。该方法只适用于安装了esxi的hp服务器。其他版本系统的可以参考安装相关工具来解决。  打开esxi的ssh服务 具体步骤不做详细描述，大概步骤参考:  c#客户端: 配置-&amp;gt;软件-&amp;gt;安全配置文件-&amp;gt;服务-&amp;gt;属性-&amp;gt;启动ssh服务 webU">
 <meta property="og:type" content="article">
-<meta property="og:title" content="我的博客">
-<meta property="og:url" content="https://yebolin.github.io/2018/08/30/我的博客/index.html">
+<meta property="og:title" content="在esxi主机上通过hponcfg重置ilo密码">
+<meta property="og:url" content="https://yebolin.github.io/2018/08/31/hp_ilo_password_reset/index.html">
 <meta property="og:site_name" content="bolin&#39;s blog">
-<meta property="og:description" content="博客说不上，偶尔写写东西，作为一下个人的笔记">
+<meta property="og:description" content="想重置hp远程管理口ilo的密码，一般情况下重启服务器就可以重置密码，但如果不想重启服务器，可以使用hponcfg工具来重置密码。该方法只适用于安装了esxi的hp服务器。其他版本系统的可以参考安装相关工具来解决。  打开esxi的ssh服务 具体步骤不做详细描述，大概步骤参考:  c#客户端: 配置-&amp;gt;软件-&amp;gt;安全配置文件-&amp;gt;服务-&amp;gt;属性-&amp;gt;启动ssh服务 webU">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-30T08:33:16.050Z">
+<meta property="og:updated_time" content="2018-08-31T06:10:57.287Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="我的博客">
-<meta name="twitter:description" content="博客说不上，偶尔写写东西，作为一下个人的笔记">
+<meta name="twitter:title" content="在esxi主机上通过hponcfg重置ilo密码">
+<meta name="twitter:description" content="想重置hp远程管理口ilo的密码，一般情况下重启服务器就可以重置密码，但如果不想重启服务器，可以使用hponcfg工具来重置密码。该方法只适用于安装了esxi的hp服务器。其他版本系统的可以参考安装相关工具来解决。  打开esxi的ssh服务 具体步骤不做详细描述，大概步骤参考:  c#客户端: 配置-&amp;gt;软件-&amp;gt;安全配置文件-&amp;gt;服务-&amp;gt;属性-&amp;gt;启动ssh服务 webU">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="https://yebolin.github.io/2018/08/30/我的博客/"/>
+  <link rel="canonical" href="https://yebolin.github.io/2018/08/31/hp_ilo_password_reset/"/>
 
 
 
 
 
-  <title>我的博客 | bolin's blog</title>
+  <title>在esxi主机上通过hponcfg重置ilo密码 | bolin's blog</title>
   
 
 
@@ -232,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://yebolin.github.io/2018/08/30/我的博客/">
+    <link itemprop="mainEntityOfPage" href="https://yebolin.github.io/2018/08/31/hp_ilo_password_reset/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Yebolin">
@@ -249,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">我的博客</h1>
+          <h1 class="post-title" itemprop="name headline">在esxi主机上通过hponcfg重置ilo密码</h1>
         
 
         <div class="post-meta">
@@ -261,8 +261,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-30T16:33:16+08:00">
-                2018-08-30
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-31T11:33:17+08:00">
+                2018-08-31
               </time>
             
 
@@ -271,6 +271,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/运维/" itemprop="url" rel="index">
+                    <span itemprop="name">运维</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -299,7 +321,42 @@
       
 
       
-        
+        <p>想重置hp远程管理口ilo的密码，一般情况下重启服务器就可以重置密码，但如果不想重启服务器，可以使用hponcfg工具来重置密码。<br>该方法只适用于安装了esxi的hp服务器。其他版本系统的可以参考安装相关工具来解决。</p>
+<ol>
+<li><p>打开esxi的ssh服务<br> 具体步骤不做详细描述，大概步骤参考:</p>
+<ul>
+<li>c#客户端: 配置-&gt;软件-&gt;安全配置文件-&gt;服务-&gt;属性-&gt;启动ssh服务</li>
+<li>webUI: 配置-&gt;系统-&gt;服务-&gt;ssh启动</li>
+</ul>
+</li>
+<li><p>ssh到esxi主机上<br>使用hp定制版本的esxi，都带有这个软件，没有的话需要去官网下载</p>
+<pre><code class="bash"><span class="built_in">cd</span> /opt/hp/tools/
+cat &gt;pw.xml&lt;&lt;EOF
+&lt;RIBCL VERSION=<span class="string">"2.0"</span>&gt;
+&lt;LOGIN USER_LOGIN=<span class="string">"Administrator"</span> PASSWORD=<span class="string">"unknown"</span>&gt;
+&lt;USER_INFO MODE=<span class="string">"write"</span>&gt;
+&lt;MOD_USER USER_LOGIN=<span class="string">"Administrator"</span>&gt;
+&lt;PASSWORD value=<span class="string">"password"</span>/&gt;
+&lt;/MOD_USER&gt;
+&lt;/USER_INFO&gt;
+&lt;/LOGIN&gt;
+&lt;/RIBCL&gt;
+EOF
+./hponcfg -f pw.xml
+</code></pre>
+</li>
+</ol>
+<p>看到如下结果表示成功</p>
+<blockquote>
+<p>HP Lights-Out Online Configuration utility</p>
+</blockquote>
+<blockquote>
+<p>Version 4.0-13 (c) Hewlett-Packard Company, 2011<br>Firmware Revision = 2.10 Device type = iLO 4 Driver name = hpilo<br>iLO IP Address: 172.*.*.*<br>Script succeeded </p>
+</blockquote>
+<ol start="3">
+<li>关闭ssh服务<br>出于安全考虑，重置密码后关闭服务。</li>
+</ol>
+
       
     </div>
     
@@ -323,8 +380,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/08/30/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2018/08/31/hexo-upload-source/" rel="next" title="hexo同时上传管理源码跟生成的网页">
+                <i class="fa fa-chevron-left"></i> hexo同时上传管理源码跟生成的网页
               </a>
             
           </div>
@@ -332,10 +389,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/08/30/hp_snmp_template/" rel="prev" title="zabbix template 3.2 转换成 3.0">
-                zabbix template 3.2 转换成 3.0 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>

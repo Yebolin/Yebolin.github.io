@@ -232,6 +232,182 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://yebolin.github.io/2018/08/31/hp_ilo_password_reset/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yebolin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="bolin's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/31/hp_ilo_password_reset/" itemprop="url">在esxi主机上通过hponcfg重置ilo密码</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-31T11:33:17+08:00">
+                2018-08-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/运维/" itemprop="url" rel="index">
+                    <span itemprop="name">运维</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>想重置hp远程管理口ilo的密码，一般情况下重启服务器就可以重置密码，但如果不想重启服务器，可以使用hponcfg工具来重置密码。<br>该方法只适用于安装了esxi的hp服务器。其他版本系统的可以参考安装相关工具来解决。</p>
+<ol>
+<li><p>打开esxi的ssh服务<br> 具体步骤不做详细描述，大概步骤参考:</p>
+<ul>
+<li>c#客户端: 配置-&gt;软件-&gt;安全配置文件-&gt;服务-&gt;属性-&gt;启动ssh服务</li>
+<li>webUI: 配置-&gt;系统-&gt;服务-&gt;ssh启动</li>
+</ul>
+</li>
+<li><p>ssh到esxi主机上<br>使用hp定制版本的esxi，都带有这个软件，没有的话需要去官网下载</p>
+<pre><code class="bash"><span class="built_in">cd</span> /opt/hp/tools/
+cat &gt;pw.xml&lt;&lt;EOF
+&lt;RIBCL VERSION=<span class="string">"2.0"</span>&gt;
+&lt;LOGIN USER_LOGIN=<span class="string">"Administrator"</span> PASSWORD=<span class="string">"unknown"</span>&gt;
+&lt;USER_INFO MODE=<span class="string">"write"</span>&gt;
+&lt;MOD_USER USER_LOGIN=<span class="string">"Administrator"</span>&gt;
+&lt;PASSWORD value=<span class="string">"password"</span>/&gt;
+&lt;/MOD_USER&gt;
+&lt;/USER_INFO&gt;
+&lt;/LOGIN&gt;
+&lt;/RIBCL&gt;
+EOF
+./hponcfg -f pw.xml
+</code></pre>
+</li>
+</ol>
+<p>看到如下结果表示成功</p>
+<blockquote>
+<p>HP Lights-Out Online Configuration utility</p>
+</blockquote>
+<blockquote>
+<p>Version 4.0-13 (c) Hewlett-Packard Company, 2011<br>Firmware Revision = 2.10 Device type = iLO 4 Driver name = hpilo<br>iLO IP Address: 172.*.*.*<br>Script succeeded </p>
+</blockquote>
+<ol start="3">
+<li>关闭ssh服务<br>出于安全考虑，重置密码后关闭服务。</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://yebolin.github.io/2018/08/31/hexo-upload-source/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -464,6 +640,15 @@
 <li><p>修改其他模板，可以参考上面步骤，另外有一个python的zabbix-template-converter的项目，不过我转换后，依然没有导入成功，只能手动修改了</p>
 </li>
 </ol>
+<p>更新：</p>
+<ul>
+<li>增加了一些触发器，状态的对应关系<code>1(other), 2(ok), 3(degraded) and 4(failed)</code>。最新版本请查看<a href="https://github.com/Yebolin/Zabbix-Templates" target="_blank" rel="noopener">github</a></li>
+<li>更新了电压的监控范围，220v电压的正常范围一般为198-240之间，原模版220-240会很多误报。</li>
+</ul>
+<p>坑：</p>
+<ul>
+<li>global status不正常，需要清空日志才正常。1.3.6.1.4.1.232.6.1.3.0</li>
+</ul>
 
           
         
@@ -792,7 +977,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
