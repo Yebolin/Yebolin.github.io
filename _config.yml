@@ -80,5 +80,7 @@ theme: next
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: git@github.com:Yebolin/Yebolin.github.io.git
+  repo: 
+    github: git@github.com:Yebolin/Yebolin.github.io.git
+    coding: git@git.coding.net:yebolin/yebolin.coding.me.git
   branch: master

@@ -37,3 +37,10 @@ tags:
 提交了PR，第一次提交PR，不过作者可能没有继续维护了，很久添加其他新的内容了
 
 5. 修改其他模板，可以参考上面步骤，另外有一个python的zabbix-template-converter的项目，不过我转换后，依然没有导入成功，只能手动修改了
+
+更新：
+  - 增加了一些触发器，状态的对应关系`1(other), 2(ok), 3(degraded) and 4(failed)`。最新版本请查看[github](https://github.com/Yebolin/Zabbix-Templates)
+  - 更新了电压的监控范围，220v电压的正常范围一般为198-240之间，原模版220-240会很多误报。
+  
+坑：
+  - global status不正常，需要清空日志才正常。1.3.6.1.4.1.232.6.1.3.0
