@@ -232,6 +232,188 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://yebolin.github.io/2018/09/04/zabbix监控vmware/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yebolin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="bolin's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/04/zabbix监控vmware/" itemprop="url">zabbix监控vmware</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-04T14:45:54+08:00">
+                2018-09-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/运维/" itemprop="url" rel="index">
+                    <span itemprop="name">运维</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>zabbix监控vmware监控，实际环境中使用的是vcenter6.5</p>
+<ol>
+<li>系统有vcenter，跟几台esxi6.0/6.5的host，有超额分配内存（一般最多比例130%），而且磁盘使用的是thin，监控不完善的情况下，可能引起内存或者磁盘满的情况下，所以需要加强监控。<br>主要用于vcetner下面的host的监控，vms的监控，因为基本每个vm下面都单独安装了zabbix agent，就不需要单独监控</li>
+</ol>
+<p>虚拟机监控分两个步骤完成。首先，Zabbix 是通过 vmware collector 进程来监控虚拟机。\<br>这些进程通过 SOAP 协议从 VMware Web 服务获取必要的信息，对其进行预处理并存储到 Zabbix server 共享内存中。\<br>然后，zabbix pollers 通过 zabbix 简单检查 VMware keys 来检索这些数据。</p>
+<ol start="2">
+<li><p>官方模板<br>首先分析一下官方的模板，是否符合我们的预期</p>
+<ul>
+<li>Template Virt VMware 模板应用于 VMware vCenter 和 ESX hypervisor 监控。 用于发现集群、hosts、vms。</li>
+<li>Template Virt VMware Hypervisor 由自动发现使用，用于host。监控项目有cpu内存，存储自动发现</li>
+<li>Template Virt VMware Guest 由自动发现使用，用于vm</li>
+</ul>
+</li>
+<li><p>模板没有任何的触发器，需要自己添加</p>
+</li>
+</ol>
+<p><a href="https://www.zabbix.com/documentation/3.0/manual/vm_monitoring" target="_blank" rel="noopener">虚拟机监控zabbix官方文档</a></p>
+<h1 id="实施步骤"><a href="#实施步骤" class="headerlink" title="实施步骤"></a>实施步骤</h1><ol>
+<li><p>修改zabbix_server.conf</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">StartVMwareCollectors=2</span><br><span class="line">VMwareCacheSize=32M</span><br><span class="line">VMwareTimeout=30</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在vcenter中创建一个全局只读账号</p>
+</li>
+<li><p>创建一个新的zabbix主机</p>
+<ul>
+<li>关联模板 Template Virt VMware（只需要关联这个，有LLD发现hosts跟vms）</li>
+<li>macros:<ul>
+<li>{$URL} - VMware 服务 (vCenter or ESX hypervisor) SDK URL (<a href="https://servername/sdk)" target="_blank" rel="noopener">https://servername/sdk)</a>.</li>
+<li>{$USERNAME} - VMware 服务用户名</li>
+<li>{$PASSWORD} - VMware 服务{$ USERNAME}用户密码</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>解决问题：</p>
+<pre><code>1. 完善触发器
+    - Free space percentage &lt; 10
+    - Overall status &lt;&gt; green(1)
+    - Used memory/Total memory &gt; 90%
+2. log没有级别，现在每分钟检查一次，用户登陆就会产生一条登陆的log，引起大量的日志
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://yebolin.github.io/2018/08/31/hp_ilo_password_reset/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -977,7 +1159,7 @@ EOF
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -999,7 +1181,7 @@ EOF
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
