@@ -232,6 +232,316 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://yebolin.github.io/2018/09/26/vmware权限_资源池/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yebolin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="bolin's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/26/vmware权限_资源池/" itemprop="url">vmware权限管理-资源池</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-26T10:39:20+08:00">
+                2018-09-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/运维/" itemprop="url" rel="index">
+                    <span itemprop="name">运维</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>创建资源池后，发现没有办法创建虚拟机，分配了资源池的管理员也无法创建。创建资源的时候，只能选择cpu跟内存，是有没有虚拟机相关的文件，存储跟网络的权限的。所以要单独给这个4个东西权限（主机与集群、虚拟机与模板、储存、网络）<br>可以在虚拟机与模板下面，创建一个文件夹，赋予权限<br>在储存下面，赋予”存储使用者”权限<br>网络赋予”网络管理员”（含网络分配权限）</p>
+<p>tag1：<br>–vcenter<br>  –datacenter<br>    –host1<br>      –vm1<br>      –resource pool  &lt;- 赋权<br>      –vm2<br>从上面看，只在这个地方赋权，由于下面没有子项目，是没有权限的，虚拟机建立的时候还需要其他权限。创建虚拟机，需要文件夹夹权限，存储跟网络</p>
+<p>tag2：<br>–vcenter<br>  –datacenter<br>    –vms</p>
+<p>tag3：<br>–vcenter<br>  –datastore<br>    –1<br>    –2<br>    –3</p>
+<p>tag4：<br>–vcenter<br>  –datacenter<br>    –network</p>
+<p>如果在vcenter或者datacenter赋权，切换tab的时候，是有子权限的，所以可以继承，而单独在RP赋权，切换的时候是没有子项的，也就没有继承权限。要单独赋权。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://yebolin.github.io/2018/09/07/使用nexus搭建本地yum/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yebolin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="bolin's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/07/使用nexus搭建本地yum/" itemprop="url">使用nexus搭建本地yum源</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-07T10:23:58+08:00">
+                2018-09-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/运维/" itemprop="url" rel="index">
+                    <span itemprop="name">运维</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>之前搭建的本地yum源，一直都是使用http服务器(nginx或apache)跟createrepo配合一起使用来搭建。但这个方式有几个问题：</p>
+<ul>
+<li>服务器端需要全量下载全部的rpm包，其实很多包不会经常使用到</li>
+<li>需要写脚本定时维护，有时候遇到版本更新的时候会很慢</li>
+<li>不能把多个yum源汇聚管理</li>
+</ul>
+<p>想把本地yum作为代理方式访问，本地有请求本地，本地没有请求远端缓存到本地，发现nexus可以满足这个需求，而且可以聚合多个yum源（其实本地搭建的也可以做聚合，新版本craterepo是可以支持子文件夹，以前老版本centos6的时候我测试过不可以）</p>
+<ul>
+<li>代理方式，不需要全量下载</li>
+<li>支持聚合多yum</li>
+<li>除了支持yum，还可以支持开放的maven，npm,docker,pypi等其他库</li>
+</ul>
+<ol>
+<li><p>下载<br><a href="https://download.sonatype.com/nexus/3/latest-unix.tar.gz" target="_blank" rel="noopener">下载最新版本Linux</a></p>
+</li>
+<li><p>安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 确保有安装jdk1.8</span></span><br><span class="line">java -version</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建用户</span></span><br><span class="line">user add -r -s /sbin/nologin nexus</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"nexus - nofile 65536"</span> &gt;&gt; /etc/security/limits.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压安装</span></span><br><span class="line">tar -xzvf latest-unix.tar.gz -C /opt</span><br><span class="line">ln -s /opt/nexus* /opt/nexus</span><br><span class="line">chown -R nexus:nexus /opt/nexus/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置成服务</span></span><br><span class="line">cat &lt;&lt;EOF &gt;/etc/systemd/system/nexus.service</span><br><span class="line">[Unit]</span><br><span class="line">Description=nexus service</span><br><span class="line">After=network.target</span><br><span class="line">  </span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">ExecStart=/opt/nexus/bin/nexus start</span><br><span class="line">ExecStop=/opt/nexus/bin/nexus stop</span><br><span class="line">User=nexus</span><br><span class="line">Restart=on-abort</span><br><span class="line">  </span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动</span></span><br><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl <span class="built_in">enable</span> nexus.service</span><br><span class="line">sudo systemctl start nexus.service</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置<br>登陆webui：<a href="http://localhost:8081/" target="_blank" rel="noopener">http://localhost:8081/</a>  默认密码admin/admin123</p>
+</li>
+</ol>
+<p><a href="https://www.sonatype.com/nexus-repository-oss" target="_blank" rel="noopener">官方介绍页面</a><br><a href="https://help.sonatype.com/repomanager3" target="_blank" rel="noopener">官方帮助文档</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://yebolin.github.io/2018/09/04/zabbix监控vmware/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -329,7 +639,7 @@
 <ol>
 <li>系统有vcenter，跟几台esxi6.0/6.5的host，有超额分配内存（一般最多比例130%），而且磁盘使用的是thin，监控不完善的情况下，可能引起内存或者磁盘满的情况下，所以需要加强监控。<br>主要用于vcetner下面的host的监控，vms的监控，因为基本每个vm下面都单独安装了zabbix agent，就不需要单独监控</li>
 </ol>
-<p>虚拟机监控分两个步骤完成。首先，Zabbix 是通过 vmware collector 进程来监控虚拟机。\<br>这些进程通过 SOAP 协议从 VMware Web 服务获取必要的信息，对其进行预处理并存储到 Zabbix server 共享内存中。\<br>然后，zabbix pollers 通过 zabbix 简单检查 VMware keys 来检索这些数据。</p>
+<p>虚拟机监控分两个步骤完成。首先，Zabbix 是通过 vmware collector 进程来监控虚拟机。这些进程通过 SOAP 协议从 VMware Web 服务获取必要的信息，对其进行预处理并存储到 Zabbix server 共享内存中。然后，zabbix pollers 通过 zabbix 简单检查 VMware keys 来检索这些数据。</p>
 <ol start="2">
 <li><p>官方模板<br>首先分析一下官方的模板，是否符合我们的预期</p>
 <ul>
@@ -344,7 +654,7 @@
 <p><a href="https://www.zabbix.com/documentation/3.0/manual/vm_monitoring" target="_blank" rel="noopener">虚拟机监控zabbix官方文档</a></p>
 <h1 id="实施步骤"><a href="#实施步骤" class="headerlink" title="实施步骤"></a>实施步骤</h1><ol>
 <li><p>修改zabbix_server.conf</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">StartVMwareCollectors=2</span><br><span class="line">VMwareCacheSize=32M</span><br><span class="line">VMwareTimeout=30</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">StartVMwareCollectors=2</span><br><span class="line">VMwareCacheSize=8M</span><br><span class="line">VMwareTimeout=30</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>在vcenter中创建一个全局只读账号</p>
 </li>
@@ -361,12 +671,16 @@
 </li>
 </ol>
 <p>解决问题：</p>
-<pre><code>1. 完善触发器
-    - Free space percentage &lt; 10
-    - Overall status &lt;&gt; green(1)
-    - Used memory/Total memory &gt; 90%
-2. log没有级别，现在每分钟检查一次，用户登陆就会产生一条登陆的log，引起大量的日志
-</code></pre>
+<ol>
+<li>完善触发器<ul>
+<li>Free space percentage &lt; 10</li>
+<li>Overall status &lt;&gt; green(1)</li>
+<li>Used memory/Total memory &gt; 90%</li>
+</ul>
+</li>
+<li>log没有级别，现在每分钟检查一次，用户登陆就会产生一条登陆的log，引起大量的日志</li>
+</ol>
+
           
         
       
@@ -1159,7 +1473,7 @@ EOF
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1228,15 +1542,9 @@ EOF
 </div>
 
 
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
 
 
 
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
 
 
 

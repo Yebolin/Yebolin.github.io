@@ -1,0 +1,62 @@
+[base]
+name=CentOS-$releasever - Base - mirrors.aliyun.com
+failovermethod=priority
+baseurl=http://172.18.6.2/repository/yum/$releasever/os/$basearch/
+gpgcheck=0
+
+#released updates 
+[updates]
+name=CentOS-$releasever - Updates - mirrors.aliyun.com
+failovermethod=priority
+baseurl=http://172.18.6.2/repository/yum/$releasever/updates/$basearch/
+gpgcheck=0
+
+#additional packages that may be useful
+[extras]
+name=CentOS-$releasever - Extras - mirrors.aliyun.com
+failovermethod=priority
+baseurl=http://172.18.6.2/repository/yum/$releasever/extras/$basearch/
+gpgcheck=0
+
+ 
+#additional packages that extend functionality of existing packages
+[centosplus]
+name=CentOS-$releasever - Plus - mirrors.aliyun.com
+failovermethod=priority
+baseurl=http://172.18.6.2/repository/yum/$releasever/centosplus/$basearch/
+gpgcheck=1
+enabled=0
+
+ 
+#contrib - packages by Centos Users
+[contrib]
+name=CentOS-$releasever - Contrib - mirrors.aliyun.com
+failovermethod=priority
+baseurl=http://172.18.6.2/repository/yum/$releasever/contrib/$basearch/
+gpgcheck=1
+enabled=0
+
+
+[epel]
+name=Extra Packages for Enterprise Linux 7 - $basearch - Local
+baseurl=http://172.18.6.2/repository/yum/7/$basearch
+failovermethod=priority
+enabled=1
+gpgcheck=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
+
+[epel-debuginfo]
+name=Extra Packages for Enterprise Linux 7 - $basearch - Debug
+baseurl=http://172.18.6.2/repository/yum/7/$basearch/debug
+failovermethod=priority
+enabled=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
+gpgcheck=0
+
+[epel-source]
+name=Extra Packages for Enterprise Linux 7 - $basearch - Source
+baseurl=http://172.18.6.2/repository/yum/7/SRPMS
+failovermethod=priority
+enabled=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
+gpgcheck=0

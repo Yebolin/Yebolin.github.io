@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="bolin&#39;s blog">
 <meta property="og:description" content="zabbix监控vmware监控，实际环境中使用的是vcenter6.5  系统有vcenter，跟几台esxi6.0/6.5的host，有超额分配内存（一般最多比例130%），而且磁盘使用的是thin，监控不完善的情况下，可能引起内存或者磁盘满的情况下，所以需要加强监控。主要用于vcetner下面的host的监控，vms的监控，因为基本每个vm下面都单独安装了zabbix agent，就不需要单">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-05T06:14:10.601Z">
+<meta property="og:updated_time" content="2018-09-05T06:25:19.898Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="zabbix监控vmware">
 <meta name="twitter:description" content="zabbix监控vmware监控，实际环境中使用的是vcenter6.5  系统有vcenter，跟几台esxi6.0/6.5的host，有超额分配内存（一般最多比例130%），而且磁盘使用的是thin，监控不完善的情况下，可能引起内存或者磁盘满的情况下，所以需要加强监控。主要用于vcetner下面的host的监控，vms的监控，因为基本每个vm下面都单独安装了zabbix agent，就不需要单">
@@ -326,7 +326,7 @@
 <ol>
 <li>系统有vcenter，跟几台esxi6.0/6.5的host，有超额分配内存（一般最多比例130%），而且磁盘使用的是thin，监控不完善的情况下，可能引起内存或者磁盘满的情况下，所以需要加强监控。<br>主要用于vcetner下面的host的监控，vms的监控，因为基本每个vm下面都单独安装了zabbix agent，就不需要单独监控</li>
 </ol>
-<p>虚拟机监控分两个步骤完成。首先，Zabbix 是通过 vmware collector 进程来监控虚拟机。\<br>这些进程通过 SOAP 协议从 VMware Web 服务获取必要的信息，对其进行预处理并存储到 Zabbix server 共享内存中。\<br>然后，zabbix pollers 通过 zabbix 简单检查 VMware keys 来检索这些数据。</p>
+<p>虚拟机监控分两个步骤完成。首先，Zabbix 是通过 vmware collector 进程来监控虚拟机。这些进程通过 SOAP 协议从 VMware Web 服务获取必要的信息，对其进行预处理并存储到 Zabbix server 共享内存中。然后，zabbix pollers 通过 zabbix 简单检查 VMware keys 来检索这些数据。</p>
 <ol start="2">
 <li><p>官方模板<br>首先分析一下官方的模板，是否符合我们的预期</p>
 <ul>
@@ -341,7 +341,7 @@
 <p><a href="https://www.zabbix.com/documentation/3.0/manual/vm_monitoring" target="_blank" rel="noopener">虚拟机监控zabbix官方文档</a></p>
 <h1 id="实施步骤"><a href="#实施步骤" class="headerlink" title="实施步骤"></a>实施步骤</h1><ol>
 <li><p>修改zabbix_server.conf</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">StartVMwareCollectors=2</span><br><span class="line">VMwareCacheSize=32M</span><br><span class="line">VMwareTimeout=30</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">StartVMwareCollectors=2</span><br><span class="line">VMwareCacheSize=8M</span><br><span class="line">VMwareTimeout=30</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>在vcenter中创建一个全局只读账号</p>
 </li>
@@ -358,12 +358,16 @@
 </li>
 </ol>
 <p>解决问题：</p>
-<pre><code>1. 完善触发器
-    - Free space percentage &lt; 10
-    - Overall status &lt;&gt; green(1)
-    - Used memory/Total memory &gt; 90%
-2. log没有级别，现在每分钟检查一次，用户登陆就会产生一条登陆的log，引起大量的日志
-</code></pre>
+<ol>
+<li>完善触发器<ul>
+<li>Free space percentage &lt; 10</li>
+<li>Overall status &lt;&gt; green(1)</li>
+<li>Used memory/Total memory &gt; 90%</li>
+</ul>
+</li>
+<li>log没有级别，现在每分钟检查一次，用户登陆就会产生一条登陆的log，引起大量的日志</li>
+</ol>
+
       
     </div>
     
@@ -406,6 +410,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/07/使用nexus搭建本地yum/" rel="prev" title="使用nexus搭建本地yum源">
+                使用nexus搭建本地yum源 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -482,7 +490,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -567,15 +575,9 @@
 </div>
 
 
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
 
 
 
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
 
 
 
