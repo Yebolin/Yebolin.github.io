@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="创建资源池后，发现没有办法创建虚拟机，分配了资源池的管理员也无法创建。创建资源的时候，只能选择cpu跟内存，是有没有虚拟机相关的文件，存储跟网络的权限的。所以要单独给这个4个东西权限（主机与集群、虚拟机与模板、储存、网络）可以在虚拟机与模板下面，创建一个文件夹，赋予权限在储存下面，赋予”存储使用者”权限网络赋予”网络管理员”（含网络分配权限） tag1：–vcenter  –datacenter">
+<meta name="description" content="创建资源池后，发现没有办法创建虚拟机，分配了资源池的管理员也无法创建。创建资源的时候，只能选择cpu跟内存，是有没有虚拟机相关的文件，存储跟网络的权限的。所以要单独给这个4个东西权限（主机与集群、虚拟机与模板、储存、网络）可以在虚拟机与模板下面，创建一个文件夹，赋予权限在储存下面，赋予”存储使用者”权限网络赋予”网络管理员”（含网络分配权限） 1234567tag1：--vcenter  --da">
 <meta name="keywords" content="运维,虚拟化">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vmware权限管理-资源池">
 <meta property="og:url" content="https://yebolin.github.io/2018/09/26/vmware权限_资源池/index.html">
 <meta property="og:site_name" content="bolin&#39;s blog">
-<meta property="og:description" content="创建资源池后，发现没有办法创建虚拟机，分配了资源池的管理员也无法创建。创建资源的时候，只能选择cpu跟内存，是有没有虚拟机相关的文件，存储跟网络的权限的。所以要单独给这个4个东西权限（主机与集群、虚拟机与模板、储存、网络）可以在虚拟机与模板下面，创建一个文件夹，赋予权限在储存下面，赋予”存储使用者”权限网络赋予”网络管理员”（含网络分配权限） tag1：–vcenter  –datacenter">
+<meta property="og:description" content="创建资源池后，发现没有办法创建虚拟机，分配了资源池的管理员也无法创建。创建资源的时候，只能选择cpu跟内存，是有没有虚拟机相关的文件，存储跟网络的权限的。所以要单独给这个4个东西权限（主机与集群、虚拟机与模板、储存、网络）可以在虚拟机与模板下面，创建一个文件夹，赋予权限在储存下面，赋予”存储使用者”权限网络赋予”网络管理员”（含网络分配权限） 1234567tag1：--vcenter  --da">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-26T03:04:31.437Z">
+<meta property="og:updated_time" content="2018-09-26T03:09:45.475Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vmware权限管理-资源池">
-<meta name="twitter:description" content="创建资源池后，发现没有办法创建虚拟机，分配了资源池的管理员也无法创建。创建资源的时候，只能选择cpu跟内存，是有没有虚拟机相关的文件，存储跟网络的权限的。所以要单独给这个4个东西权限（主机与集群、虚拟机与模板、储存、网络）可以在虚拟机与模板下面，创建一个文件夹，赋予权限在储存下面，赋予”存储使用者”权限网络赋予”网络管理员”（含网络分配权限） tag1：–vcenter  –datacenter">
+<meta name="twitter:description" content="创建资源池后，发现没有办法创建虚拟机，分配了资源池的管理员也无法创建。创建资源的时候，只能选择cpu跟内存，是有没有虚拟机相关的文件，存储跟网络的权限的。所以要单独给这个4个东西权限（主机与集群、虚拟机与模板、储存、网络）可以在虚拟机与模板下面，创建一个文件夹，赋予权限在储存下面，赋予”存储使用者”权限网络赋予”网络管理员”（含网络分配权限） 1234567tag1：--vcenter  --da">
 
 
 
@@ -323,10 +323,9 @@
 
       
         <p>创建资源池后，发现没有办法创建虚拟机，分配了资源池的管理员也无法创建。创建资源的时候，只能选择cpu跟内存，是有没有虚拟机相关的文件，存储跟网络的权限的。所以要单独给这个4个东西权限（主机与集群、虚拟机与模板、储存、网络）<br>可以在虚拟机与模板下面，创建一个文件夹，赋予权限<br>在储存下面，赋予”存储使用者”权限<br>网络赋予”网络管理员”（含网络分配权限）</p>
-<p>tag1：<br>–vcenter<br>  –datacenter<br>    –host1<br>      –vm1<br>      –resource pool  &lt;- 赋权<br>      –vm2<br>从上面看，只在这个地方赋权，由于下面没有子项目，是没有权限的，虚拟机建立的时候还需要其他权限。创建虚拟机，需要文件夹夹权限，存储跟网络</p>
-<p>tag2：<br>–vcenter<br>  –datacenter<br>    –vms</p>
-<p>tag3：<br>–vcenter<br>  –datastore<br>    –1<br>    –2<br>    –3</p>
-<p>tag4：<br>–vcenter<br>  –datacenter<br>    –network</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">tag1：</span><br><span class="line">--vcenter</span><br><span class="line">  --datacenter</span><br><span class="line">    --host1</span><br><span class="line">	  --vm1</span><br><span class="line">	  --resource pool  &lt;- 赋权</span><br><span class="line">	  --vm2</span><br></pre></td></tr></table></figure>
+<p>从上面看，只在这个地方赋权，由于下面没有子项目，是没有权限的，虚拟机建立的时候还需要其他权限。创建虚拟机，需要文件夹夹权限，存储跟网络</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">tag2：</span><br><span class="line">--vcenter</span><br><span class="line">  --datacenter</span><br><span class="line">    --vms</span><br><span class="line"></span><br><span class="line">tag3：</span><br><span class="line">--vcenter</span><br><span class="line">  --datastore</span><br><span class="line">    --1</span><br><span class="line">	--2</span><br><span class="line">	--3</span><br><span class="line">	</span><br><span class="line">tag4：</span><br><span class="line">--vcenter</span><br><span class="line">  --datacenter</span><br><span class="line">    --network</span><br></pre></td></tr></table></figure>
 <p>如果在vcenter或者datacenter赋权，切换tab的时候，是有子权限的，所以可以继承，而单独在RP赋权，切换的时候是没有子项的，也就没有继承权限。要单独赋权。</p>
 
       
