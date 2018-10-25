@@ -232,6 +232,130 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://yebolin.github.io/2018/10/24/后台进程(daemon)取环境变量/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yebolin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="bolin's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/24/后台进程(daemon)取环境变量/" itemprop="url">��̨����(daemon)ȡ��������</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-24T17:17:15+08:00">
+                2018-10-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="��̨����-daemon-ȡ��������"><a href="#��̨����-daemon-ȡ��������" class="headerlink" title="��̨����(daemon)ȡ��������"></a>��̨����(daemon)ȡ��������</h1><h2 id="zabbix"><a href="#zabbix" class="headerlink" title="zabbix"></a>zabbix</h2><p>΢�ŷ�����һ�������ƣ�golang��http-client�����ļ�����Դ�룬�޷��޸�Դ�룬�������Է��ֻ��Զ���ȡhttp_proxy���ϵͳ�����������Է��֣���zabbix���̲������ӽ��̲�û�иû�������<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">zabbix   17901     1  0 09:34 ?        00:00:00  /usr/local/zabbix/sbin/zabbix_server</span><br><span class="line">zabbix   17941 17901  0 09:34 ?        00:00:00 /usr/local/zabbix/sbin/zabbix_server: trapper #4 [processing data]</span><br><span class="line">zabbix   21879 17941  0 10:27 ?        00:00:00 sh -c /bin/ping -c 300 172.18.4.5 2&gt;&amp;1</span><br><span class="line">zabbix   21880 21879  0 10:27 ?        00:00:00 /bin/ping -c 300 172.18.4.5</span><br></pre></td></tr></table></figure></p>
+<p>����һ��ping�Ĳ��Խű������Կ�����zabbix���еĽű����ǴӺ�̨�ĳ���(agent ���� server)���ӽ��̣����������û������fork()���ӽ���Ҳ�����С�</p>
+<p>����취��<br>��daemon���ʱ�򣬾ͼ��뻷������<br>����sysint����/etc/init/zabbix-sever�м���<br><code>export http_proxy=&quot;http://172.18.6.2:3128&quot;</code><br><code>export https_proxy=&quot;http://172.18.6.2:3128&quot;</code><br>systemd<br><code>Environment=http_proxy=&quot;http://172.18.6.2:3128&quot;</code></p>
+<h2 id="etc-profile-��-etc-bashrc"><a href="#etc-profile-��-etc-bashrc" class="headerlink" title="/etc/profile �� /etc/bashrc"></a>/etc/profile �� /etc/bashrc</h2><p>profileֻӰ�쵽����ʽshell������ssh��½���նˣ�su<br>bashrcͬʱӰ�콻����ǽ���ʽshell������sshֱ��Զ��ִ������<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;export test_var=&apos;test&apos;&quot; &gt;&gt; /etc/profile</span><br><span class="line"># ���µ�½ssh���ߣ��������</span><br><span class="line"># ʹ��sshִ��,Ϊ�ǽ��������Ϊ��</span><br><span class="line">ssh 127.0.0.1 &quot;env | grep test &quot;</span><br><span class="line"></span><br><span class="line"># �޸�bashrc</span><br><span class="line">echo &quot;export test_var=&apos;test bashrc&apos;&quot; &gt;&gt; /etc/bashrc</span><br><span class="line">ssh 127.0.0.1 &quot;env | grep test &quot;</span><br><span class="line"># ���test_var=test bashrc</span><br></pre></td></tr></table></figure></p>
+<p>���2��������Ӱ�쵽systemd</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://yebolin.github.io/2018/09/26/vmware权限_资源池/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1472,7 +1596,7 @@ EOF
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

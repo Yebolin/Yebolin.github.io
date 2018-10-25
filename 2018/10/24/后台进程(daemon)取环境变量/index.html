@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="运维," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -79,18 +79,17 @@
 
 
 
-<meta name="description" content="之前搭建的本地yum源，一直都是使用http服务器(nginx或apache)跟createrepo配合一起使用来搭建。但这个方式有几个问题：  服务器端需要全量下载全部的rpm包，其实很多包不会经常使用到 需要写脚本定时维护，有时候遇到版本更新的时候会很慢 不能把多个yum源汇聚管理  想把本地yum作为代理方式访问，本地有请求本地，本地没有请求远端缓存到本地，发现nexus可以满足这个需求，而">
-<meta name="keywords" content="运维">
+<meta name="description" content="��̨����(daemon)ȡ��������zabbix΢�ŷ�����һ�������ƣ�golang��http-client�����ļ�����Դ�룬�޷��޸�Դ�룬�������Է��ֻ��Զ���ȡhttp_proxy���ϵͳ�����������Է��֣���zabbix���̲������ӽ��̲�û�иû�������1234zabbix   17901     1  0">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用nexus搭建本地yum源">
-<meta property="og:url" content="https://yebolin.github.io/2018/09/07/使用nexus搭建本地yum/index.html">
+<meta property="og:title" content="��̨����(daemon)ȡ��������">
+<meta property="og:url" content="https://yebolin.github.io/2018/10/24/后台进程(daemon)取环境变量/index.html">
 <meta property="og:site_name" content="bolin&#39;s blog">
-<meta property="og:description" content="之前搭建的本地yum源，一直都是使用http服务器(nginx或apache)跟createrepo配合一起使用来搭建。但这个方式有几个问题：  服务器端需要全量下载全部的rpm包，其实很多包不会经常使用到 需要写脚本定时维护，有时候遇到版本更新的时候会很慢 不能把多个yum源汇聚管理  想把本地yum作为代理方式访问，本地有请求本地，本地没有请求远端缓存到本地，发现nexus可以满足这个需求，而">
+<meta property="og:description" content="��̨����(daemon)ȡ��������zabbix΢�ŷ�����һ�������ƣ�golang��http-client�����ļ�����Դ�룬�޷��޸�Դ�룬�������Է��ֻ��Զ���ȡhttp_proxy���ϵͳ�����������Է��֣���zabbix���̲������ӽ��̲�û�иû�������1234zabbix   17901     1  0">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-07T06:52:19.753Z">
+<meta property="og:updated_time" content="2018-10-24T09:17:52.426Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用nexus搭建本地yum源">
-<meta name="twitter:description" content="之前搭建的本地yum源，一直都是使用http服务器(nginx或apache)跟createrepo配合一起使用来搭建。但这个方式有几个问题：  服务器端需要全量下载全部的rpm包，其实很多包不会经常使用到 需要写脚本定时维护，有时候遇到版本更新的时候会很慢 不能把多个yum源汇聚管理  想把本地yum作为代理方式访问，本地有请求本地，本地没有请求远端缓存到本地，发现nexus可以满足这个需求，而">
+<meta name="twitter:title" content="��̨����(daemon)ȡ��������">
+<meta name="twitter:description" content="��̨����(daemon)ȡ��������zabbix΢�ŷ�����һ�������ƣ�golang��http-client�����ļ�����Դ�룬�޷��޸�Դ�룬�������Է��ֻ��Զ���ȡhttp_proxy���ϵͳ�����������Է��֣���zabbix���̲������ӽ��̲�û�иû�������1234zabbix   17901     1  0">
 
 
 
@@ -120,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="https://yebolin.github.io/2018/09/07/使用nexus搭建本地yum/"/>
+  <link rel="canonical" href="https://yebolin.github.io/2018/10/24/后台进程(daemon)取环境变量/"/>
 
 
 
 
 
-  <title>使用nexus搭建本地yum源 | bolin's blog</title>
+  <title>��̨����(daemon)ȡ�������� | bolin's blog</title>
   
 
 
@@ -233,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://yebolin.github.io/2018/09/07/使用nexus搭建本地yum/">
+    <link itemprop="mainEntityOfPage" href="https://yebolin.github.io/2018/10/24/后台进程(daemon)取环境变量/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Yebolin">
@@ -250,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">使用nexus搭建本地yum源</h1>
+          <h1 class="post-title" itemprop="name headline">��̨����(daemon)ȡ��������</h1>
         
 
         <div class="post-meta">
@@ -262,8 +261,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-07T10:23:58+08:00">
-                2018-09-07
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-24T17:17:15+08:00">
+                2018-10-24
               </time>
             
 
@@ -272,28 +271,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/运维/" itemprop="url" rel="index">
-                    <span itemprop="name">运维</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -322,28 +299,11 @@
       
 
       
-        <p>之前搭建的本地yum源，一直都是使用http服务器(nginx或apache)跟createrepo配合一起使用来搭建。但这个方式有几个问题：</p>
-<ul>
-<li>服务器端需要全量下载全部的rpm包，其实很多包不会经常使用到</li>
-<li>需要写脚本定时维护，有时候遇到版本更新的时候会很慢</li>
-<li>不能把多个yum源汇聚管理</li>
-</ul>
-<p>想把本地yum作为代理方式访问，本地有请求本地，本地没有请求远端缓存到本地，发现nexus可以满足这个需求，而且可以聚合多个yum源（其实本地搭建的也可以做聚合，新版本craterepo是可以支持子文件夹，以前老版本centos6的时候我测试过不可以）</p>
-<ul>
-<li>代理方式，不需要全量下载</li>
-<li>支持聚合多yum</li>
-<li>除了支持yum，还可以支持开放的maven，npm,docker,pypi等其他库</li>
-</ul>
-<ol>
-<li><p>下载<br><a href="https://download.sonatype.com/nexus/3/latest-unix.tar.gz" target="_blank" rel="noopener">下载最新版本Linux</a></p>
-</li>
-<li><p>安装</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 确保有安装jdk1.8</span></span><br><span class="line">java -version</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建用户</span></span><br><span class="line">user add -r -s /sbin/nologin nexus</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"nexus - nofile 65536"</span> &gt;&gt; /etc/security/limits.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压安装</span></span><br><span class="line">tar -xzvf latest-unix.tar.gz -C /opt</span><br><span class="line">ln -s /opt/nexus* /opt/nexus</span><br><span class="line">chown -R nexus:nexus /opt/nexus/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置成服务</span></span><br><span class="line">cat &lt;&lt;EOF &gt;/etc/systemd/system/nexus.service</span><br><span class="line">[Unit]</span><br><span class="line">Description=nexus service</span><br><span class="line">After=network.target</span><br><span class="line">  </span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">ExecStart=/opt/nexus/bin/nexus start</span><br><span class="line">ExecStop=/opt/nexus/bin/nexus stop</span><br><span class="line">User=nexus</span><br><span class="line">Restart=on-abort</span><br><span class="line">  </span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动</span></span><br><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl <span class="built_in">enable</span> nexus.service</span><br><span class="line">sudo systemctl start nexus.service</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>配置<br>登陆webui：<a href="http://localhost:8081/" target="_blank" rel="noopener">http://localhost:8081/</a>  默认密码admin/admin123</p>
-</li>
-</ol>
-<p><a href="https://www.sonatype.com/nexus-repository-oss" target="_blank" rel="noopener">官方介绍页面</a><br><a href="https://help.sonatype.com/repomanager3" target="_blank" rel="noopener">官方帮助文档</a></p>
+        <h1 id="��̨����-daemon-ȡ��������"><a href="#��̨����-daemon-ȡ��������" class="headerlink" title="��̨����(daemon)ȡ��������"></a>��̨����(daemon)ȡ��������</h1><h2 id="zabbix"><a href="#zabbix" class="headerlink" title="zabbix"></a>zabbix</h2><p>΢�ŷ�����һ�������ƣ�golang��http-client�����ļ�����Դ�룬�޷��޸�Դ�룬�������Է��ֻ��Զ���ȡhttp_proxy���ϵͳ�����������Է��֣���zabbix���̲������ӽ��̲�û�иû�������<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">zabbix   17901     1  0 09:34 ?        00:00:00  /usr/local/zabbix/sbin/zabbix_server</span><br><span class="line">zabbix   17941 17901  0 09:34 ?        00:00:00 /usr/local/zabbix/sbin/zabbix_server: trapper #4 [processing data]</span><br><span class="line">zabbix   21879 17941  0 10:27 ?        00:00:00 sh -c /bin/ping -c 300 172.18.4.5 2&gt;&amp;1</span><br><span class="line">zabbix   21880 21879  0 10:27 ?        00:00:00 /bin/ping -c 300 172.18.4.5</span><br></pre></td></tr></table></figure></p>
+<p>����һ��ping�Ĳ��Խű������Կ�����zabbix���еĽű����ǴӺ�̨�ĳ���(agent ���� server)���ӽ��̣����������û������fork()���ӽ���Ҳ�����С�</p>
+<p>����취��<br>��daemon���ʱ�򣬾ͼ��뻷������<br>����sysint����/etc/init/zabbix-sever�м���<br><code>export http_proxy=&quot;http://172.18.6.2:3128&quot;</code><br><code>export https_proxy=&quot;http://172.18.6.2:3128&quot;</code><br>systemd<br><code>Environment=http_proxy=&quot;http://172.18.6.2:3128&quot;</code></p>
+<h2 id="etc-profile-��-etc-bashrc"><a href="#etc-profile-��-etc-bashrc" class="headerlink" title="/etc/profile �� /etc/bashrc"></a>/etc/profile �� /etc/bashrc</h2><p>profileֻӰ�쵽����ʽshell������ssh��½���նˣ�su<br>bashrcͬʱӰ�콻����ǽ���ʽshell������sshֱ��Զ��ִ������<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;export test_var=&apos;test&apos;&quot; &gt;&gt; /etc/profile</span><br><span class="line"># ���µ�½ssh���ߣ��������</span><br><span class="line"># ʹ��sshִ��,Ϊ�ǽ��������Ϊ��</span><br><span class="line">ssh 127.0.0.1 &quot;env | grep test &quot;</span><br><span class="line"></span><br><span class="line"># �޸�bashrc</span><br><span class="line">echo &quot;export test_var=&apos;test bashrc&apos;&quot; &gt;&gt; /etc/bashrc</span><br><span class="line">ssh 127.0.0.1 &quot;env | grep test &quot;</span><br><span class="line"># ���test_var=test bashrc</span><br></pre></td></tr></table></figure></p>
+<p>���2��������Ӱ�쵽systemd</p>
 
       
     </div>
@@ -359,12 +319,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/运维/" rel="tag"># 运维</a>
-          
-        </div>
-      
 
       
       
@@ -374,8 +328,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/04/zabbix监控vmware/" rel="next" title="zabbix监控vmware">
-                <i class="fa fa-chevron-left"></i> zabbix监控vmware
+              <a href="/2018/09/26/vmware权限_资源池/" rel="next" title="vmware权限管理-资源池">
+                <i class="fa fa-chevron-left"></i> vmware权限管理-资源池
               </a>
             
           </div>
@@ -383,10 +337,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/09/26/vmware权限_资源池/" rel="prev" title="vmware权限管理-资源池">
-                vmware权限管理-资源池 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -438,8 +388,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -499,6 +458,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#��̨����-daemon-ȡ��������"><span class="nav-number">1.</span> <span class="nav-text">��̨����(daemon)ȡ��������</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#zabbix"><span class="nav-number">1.1.</span> <span class="nav-text">zabbix</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#etc-profile-��-etc-bashrc"><span class="nav-number">1.2.</span> <span class="nav-text">/etc/profile �� /etc/bashrc</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
